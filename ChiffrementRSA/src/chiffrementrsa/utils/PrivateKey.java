@@ -11,5 +11,18 @@ package chiffrementrsa.utils;
  * @author Gaëtan
  */
 public class PrivateKey {
-    //ToDo
+    /**
+     * genere U second membre de la clef privee
+     */
+    public void generateU(){
+        MathUtils math = new MathUtils();
+        RSAKey.privateKey.second = math.modInverse((int)RSAKey.publicKey.second, RSAKey.M);
+    }
+    /**
+     * constructeur, appelle simplement generateU()
+     */
+    public PrivateKey() {
+        generateU();
+    }
+    
 }

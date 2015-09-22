@@ -53,6 +53,36 @@ public class MathUtils {
         return ( a -( (a/b)*b) );
     }
     
+    /**
+     * pow of Fermat’s Little Theorem
+     * @param a un int
+     * @param b un int
+     * @param MOD un int
+     * @return int
+     */
+    int pow(int a, int b, int MOD) {
+        int x = 1, y = a;
+            while(b > 0) {
+                if(b%2 == 1) {
+                    x=(x*y);
+                    if(x>MOD) x%=MOD;
+                }
+                y = (y*y);
+                if(y>MOD) y%=MOD;
+                b /= 2;
+            }
+        return x;
+    }
+    
+    /**
+     * Inverse modulaire, Fermat’s Little Theorem
+     * @param a un int
+     * @param m un int
+     * @return l'inverse modulaire de a par m
+     */
+    int modInverse(int a, int m) {
+        return pow(a,m-2,m);
+    }
     
     public static void main(String[] args) {
         /*
@@ -60,7 +90,9 @@ public class MathUtils {
         System.out.println(math.Power(2, 2));
         System.out.println(math.PGCD(10, 2));
         System.out.println(math.mod(9, 4));
+        System.out.println(math.modInverse(123,4567));
         //ceci est un test !
         */
+        
     }
 }
