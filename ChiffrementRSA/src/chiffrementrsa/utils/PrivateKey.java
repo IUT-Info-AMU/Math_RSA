@@ -17,6 +17,7 @@ public class PrivateKey {
     public void generateU(){
         MathUtils math = new MathUtils();
         RSAKey.privateKey.second = math.modInverse((int)RSAKey.publicKey.second, RSAKey.M);
+        System.out.println(RSAKey.privateKey.second);
     }
     /**
      * constructeur, appelle simplement generateU()

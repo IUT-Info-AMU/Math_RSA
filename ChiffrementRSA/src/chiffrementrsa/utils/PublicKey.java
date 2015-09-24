@@ -33,7 +33,7 @@ public class PublicKey {
     /**
      * Genere la clef public, N en utilisant la formule N = p*q et les fonctions GenerateM et GenerateC pour Generer M et C
      **/
-    PublicKey(){
+    public PublicKey(){
         PrimeNumber primeNumber = new PrimeNumber();
         primeNumber.GeneratePrimePAndQ(Config.generatePrimeMin,Config.generatePrimeMax);
         GenerateM();
@@ -46,7 +46,5 @@ public class PublicKey {
     
     public static void main(String[] args) {
         PublicKey pub = new PublicKey();
-        MathUtils math = new MathUtils();
-        System.out.println(math.mod(9,4));
     }
 }

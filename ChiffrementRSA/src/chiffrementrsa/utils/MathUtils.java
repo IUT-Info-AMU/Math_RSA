@@ -6,6 +6,8 @@
 
 package chiffrementrsa.utils;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author Gaëtan
@@ -13,16 +15,16 @@ package chiffrementrsa.utils;
 public class MathUtils {    
     /**
      * calcule la puissance avec la base et l'exposant en parametre 
-     * @param base la base de la puissance, un int
+     * @param base la base de la puissance, un BigInteger
      * @param exp  l'exposant de la puissance, un int
      * @return le resultat de base Ã  la puissance exp, un int
      **/
-    public int Power(int base, int exp){
-        int powerResultat = 1;
+    public BigInteger Power(BigInteger base, int exp){
+        BigInteger powerResultat = new BigInteger("1");
         if(exp == 1) return base;
         if(exp == 0) return base;
         for(int i = 0; i < exp; ++i){
-            powerResultat *= base;
+            powerResultat = powerResultat.multiply(base);
         }
         return powerResultat;
     }
@@ -49,8 +51,8 @@ public class MathUtils {
      * @param b un int
      * @return le modulo de a par b, un int
      */
-    public int mod(int a,int b){
-        return ( a -( (a/b)*b) );
+    public BigInteger mod(BigInteger a,BigInteger b){
+        return ( a.subtract((a.divide(b)).multiply(b)) );
     }
     
     /**

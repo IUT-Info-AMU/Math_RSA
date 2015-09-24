@@ -6,17 +6,37 @@
 
 package chiffrementrsa;
 
+import chiffrementrsa.utils.MathUtils;
+import chiffrementrsa.utils.PrivateKey;
+import chiffrementrsa.utils.PublicKey;
+import chiffrementrsa.utils.RSAKey;
+import java.math.BigInteger;
+
 /**
  *
  * @author Gaëtan
  */
 public class ChiffrementRSA {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    
+    void createKeys(){
+        new PublicKey();
+        new PrivateKey();
     }
     
+    void encrypt(String messageToEncrypt){
+        MathUtils math = new MathUtils();
+        String messageEncrypt = new String();
+        for(char c : messageToEncrypt.toCharArray()){
+            messageEncrypt+= math.mod(math.Power(new BigInteger((int)c+""),7), new BigInteger(5141+""));
+        }
+        System.out.println(messageEncrypt);
+
+    }
+    
+    public static void main(String[] args) {
+        ChiffrementRSA chiffrement = new ChiffrementRSA();
+        chiffrement.createKeys();
+        chiffrement.encrypt("Bonjour !");
+        
+    }  
 }

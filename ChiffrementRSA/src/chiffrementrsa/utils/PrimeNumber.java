@@ -56,9 +56,4 @@ public class PrimeNumber {
         RSAKey.primePAndQ.second = GeneratePrimeNumber(min + firstPrimeNumber,max + firstPrimeNumber);
         System.out.println(RSAKey.primePAndQ.first + " " + RSAKey.primePAndQ.second);
     }
-    
-    public void TestGeneratePrimePAndQ(){
-        GeneratePrimePAndQ(0,100);
-        System.out.println(RSAKey.primePAndQ.first + " " + RSAKey.primePAndQ.second);
-    }
 }
