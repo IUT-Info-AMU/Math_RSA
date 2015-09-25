@@ -23,20 +23,20 @@ public class ChiffrementRSA {
         new PrivateKey();
     }
     
-    void encrypt(String messageToEncrypt){
+    String encrypt(String messageToEncrypt){
         MathUtils math = new MathUtils();
         String messageEncrypt = new String();
         for(char c : messageToEncrypt.toCharArray()){
             messageEncrypt+= math.mod(math.Power(new BigInteger((int)c+""),7), new BigInteger(5141+""));
         }
-        System.out.println(messageEncrypt);
+        return messageEncrypt;
 
     }
     
     public static void main(String[] args) {
         ChiffrementRSA chiffrement = new ChiffrementRSA();
         chiffrement.createKeys();
-        chiffrement.encrypt("Bonjour !");
+        System.out.println(chiffrement.encrypt("Bonjour !"));
         
     }  
 }
