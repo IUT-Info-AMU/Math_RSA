@@ -27,7 +27,7 @@ public class ChiffrementRSA {
         MathUtils math = new MathUtils();
         String messageEncrypt = new String();
         for(char c : messageToEncrypt.toCharArray()){
-            messageEncrypt+= math.mod(math.Power(new BigInteger((int)c+""),7), new BigInteger(5141+""));
+            messageEncrypt+= math.mod(math.Power(new BigInteger((int)c+""),7), new BigInteger(5141+"")) + " ";
         }
         return messageEncrypt;
 
