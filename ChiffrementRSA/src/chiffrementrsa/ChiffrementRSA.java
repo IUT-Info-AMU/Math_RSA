@@ -33,10 +33,28 @@ public class ChiffrementRSA {
 
     }
     
+    String decrypt(String messageToDecrypt){
+        MathUtils math = new MathUtils();
+        String messageDecrypt = new String();
+        String subMessage = new String():
+        for(char c : messageToDecrypt.toCharArray()){
+            if(c == " "){
+                messageDecrypt += math.mod(math.Power(new BigInteger(Integer.parseInt(subMessage.substring(0))),4279), new BigInteger(5141+""));
+                subMessage = "";
+            }
+            else{
+                subMessage += c;
+            }
+        }
+        return messageDecrypt;
+    }
+    
     public static void main(String[] args) {
         ChiffrementRSA chiffrement = new ChiffrementRSA();
         chiffrement.createKeys();
-        System.out.println(chiffrement.encrypt("Bonjour !"));
+        String message = new String(chiffrement.encrypt("Bonjour !"));
+        System.out.println(message);
+        System.out.println(chiffrement.decrypt(message));
         
     }  
 }
