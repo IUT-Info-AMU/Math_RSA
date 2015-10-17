@@ -27,7 +27,7 @@ public class ChiffrementRSA {
         MathUtils math = new MathUtils();
         String messageEncrypt = new String();
         for(char c : messageToEncrypt.toCharArray()){
-            messageEncrypt+= math.mod(math.Power(new BigInteger((int)c+""),7), new BigInteger(5141+"")) + " ";
+            messageEncrypt+= math.mod(math.Power(new BigInteger((int)c+""),(int)RSAKey.publicKey.second), new BigInteger(RSAKey.publicKey.first+"")) + " ";
         }
         return messageEncrypt;
 
@@ -39,7 +39,8 @@ public class ChiffrementRSA {
         String subMessage = new String();
         for(char c : messageToDecrypt.toCharArray()){
             if(c == ' '){
-                messageDecrypt += (char)(math.mod(math.Power(new BigInteger(Integer.parseInt(subMessage.substring(0))+""),4279), new BigInteger(5141+""))).intValue();
+
+                messageDecrypt +=(char) (math.mod(math.Power(new BigInteger(subMessage), (int)RSAKey.privateKey.second),new BigInteger(RSAKey.privateKey.first+""))).intValue();
                 subMessage = "";
             }
             else{
@@ -52,7 +53,7 @@ public class ChiffrementRSA {
     public static void main(String[] args) {
         ChiffrementRSA chiffrement = new ChiffrementRSA();
         chiffrement.createKeys();
-        String message = new String(chiffrement.encrypt("Bravo"));
+        String message = new String(chiffrement.encrypt("Bravo ! Tu es fort !"));
         System.out.println(message);
         System.out.println(chiffrement.decrypt(message));
         

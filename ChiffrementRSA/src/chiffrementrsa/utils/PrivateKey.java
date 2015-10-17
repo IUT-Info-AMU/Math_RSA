@@ -23,6 +23,7 @@ public class PrivateKey {
      * constructeur, appelle simplement generateU()
      */
     public PrivateKey() {
+        RSAKey.privateKey.first = RSAKey.publicKey.first;
         generateU();
     }
     

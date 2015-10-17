@@ -11,8 +11,8 @@ package chiffrementrsa.utils;
  * @author Gaëtan
  */
 public class Config {
-    public static int generatePrimeMin = 0;
-    public static int generatePrimeMax = 100;
+    public static int generatePrimeMin = 20;
+    public static int generatePrimeMax = 120;
     public static int MaxC = 15;
     public static int MinC = 5;
     //ToDo permettre de modifier la config par l'interface du logiciel
