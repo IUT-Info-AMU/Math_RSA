@@ -13,35 +13,55 @@ import java.util.Random;
  * @author Gaëtan
  */
 public class PublicKey {
+    
+    private static int publicKeyN;
+    private static int publicKeyC;
+    private static int M;
+    private final static PublicKey instance = new PublicKey();
+
+    public static int getPublicKeyN() {
+        return publicKeyN;
+    }
+
+    public static int getPublicKeyC() {
+        return publicKeyC;
+    }
+
+    public static int getM() {
+        return M;
+    }
+
+    public static PublicKey getInstance() {
+        return instance;
+    }
+ 
     /**
      *Genere M a  partir de p et q avec la formule (p-1)*(q-1) 
      **/
     public void GenerateM(){
-        RSAKey.M = ((int) RSAKey.primePAndQ.first -1) * ((int) RSAKey.primePAndQ.second -1);
+        M = (PrimeNumber.getPrimeP() -1) * (PrimeNumber.getPrimeQ() -1);
     }
     /**
      * Genere C ayant pour PGCD 1 avec M, il doit etre contneu entre MinC et MaxC
      **/
     public void GenerateC(){
         Random rand = new Random();
-        RSAKey.publicKey.second = rand.nextInt(Config.MaxC - Config.MinC) + Config.MinC;
+        publicKeyC = rand.nextInt(Config.MaxC - Config.MinC) + Config.MinC;
         MathUtils math = new MathUtils();
-        while (math.PGCD(RSAKey.M,(int)RSAKey.publicKey.second) != 1){
-            RSAKey.publicKey.second = rand.nextInt(Config.MaxC - Config.MinC) + Config.MinC;
+        while (math.PGCD(M,publicKeyC) != 1){
+            publicKeyC = rand.nextInt(Config.MaxC - Config.MinC) + Config.MinC;
         }
     }
     /**
      * Genere la clef public, N en utilisant la formule N = p*q et les fonctions GenerateM et GenerateC pour Generer M et C
      **/
-    public PublicKey(){
-        PrimeNumber primeNumber = new PrimeNumber();
-        primeNumber.GeneratePrimePAndQ(Config.generatePrimeMin,Config.generatePrimeMax);
+    private PublicKey(){
         GenerateM();
         GenerateC();
-        RSAKey.publicKey.first = (int) RSAKey.primePAndQ.first * (int) RSAKey.primePAndQ.second;
-        System.out.println(RSAKey.publicKey.first);
-        System.out.println(RSAKey.M);
-        System.out.println(RSAKey.publicKey.second);
+        publicKeyN = PrimeNumber.getPrimeP() * PrimeNumber.getPrimeQ();
+        System.out.println(publicKeyN);
+        System.out.println(M);
+        System.out.println(publicKeyC);
     }
     
     public static void main(String[] args) {

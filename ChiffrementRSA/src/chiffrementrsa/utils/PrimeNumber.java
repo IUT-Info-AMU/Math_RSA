@@ -13,6 +13,27 @@ import java.util.Random;
  * @author Gaëtan
  */
 public class PrimeNumber {
+   
+    private static int primeP;
+    private static int primeQ;
+    private final static PrimeNumber instance = new PrimeNumber(Config.generatePrimeMin,Config.generatePrimeMax);
+
+    public PrimeNumber(int min, int max) {
+        GeneratePrimePAndQ(min,max);
+    }
+
+    public static int getPrimeP() {
+        return primeP;
+    }
+
+    public static int getPrimeQ() {
+        return primeQ;
+    }
+    
+    public static PrimeNumber getInstance(){
+        return instance;
+    }
+    
     /**
      * Renvoie si un entier passe un parametre est un nombre premier ou pas
      * @param n un entier
@@ -40,7 +61,7 @@ public class PrimeNumber {
             throw new IllegalArgumentException("min must be smaller the max.");
         Random rand = new Random();
         int primeNumber = rand.nextInt(max - min) + min;
-        while(!isPrime(primeNumber) || (int)RSAKey.primePAndQ.first == primeNumber){
+        while(!isPrime(primeNumber) || primeP == primeNumber){
             primeNumber = rand.nextInt(max - min) + min;
         }
         return primeNumber;
@@ -52,8 +73,8 @@ public class PrimeNumber {
      */
     public void GeneratePrimePAndQ(int min,int max){
         int firstPrimeNumber = GeneratePrimeNumber(min,max);
-        RSAKey.primePAndQ.first = firstPrimeNumber;
-        RSAKey.primePAndQ.second = GeneratePrimeNumber(min + firstPrimeNumber,max + firstPrimeNumber);
-        System.out.println(RSAKey.primePAndQ.first + " " + RSAKey.primePAndQ.second);
+        primeP = firstPrimeNumber;
+        primeQ = GeneratePrimeNumber(min + firstPrimeNumber,max + firstPrimeNumber);
+        System.out.println(primeP + " " + primeQ);
     }
 }

@@ -9,7 +9,6 @@ package chiffrementrsa;
 import chiffrementrsa.utils.MathUtils;
 import chiffrementrsa.utils.PrivateKey;
 import chiffrementrsa.utils.PublicKey;
-import chiffrementrsa.utils.RSAKey;
 import java.math.BigInteger;
 
 /**
@@ -18,16 +17,11 @@ import java.math.BigInteger;
  */
 public class ChiffrementRSA {
     
-    void createKeys(){
-        new PublicKey();
-        new PrivateKey();
-    }
-    
     String encrypt(String messageToEncrypt){
         MathUtils math = new MathUtils();
         String messageEncrypt = new String();
         for(char c : messageToEncrypt.toCharArray()){
-            messageEncrypt+= math.mod(math.Power(new BigInteger((int)c+""),(int)RSAKey.publicKey.second), new BigInteger(RSAKey.publicKey.first+"")) + " ";
+            messageEncrypt+= math.mod(math.Power(new BigInteger((int)c+""),PublicKey.getInstance().getPublicKeyC()), new BigInteger(PublicKey.getInstance().getPublicKeyN()+"")) + " ";
         }
         return messageEncrypt;
 
@@ -40,7 +34,7 @@ public class ChiffrementRSA {
         for(char c : messageToDecrypt.toCharArray()){
             if(c == ' '){
 
-                messageDecrypt +=(char) (math.mod(math.Power(new BigInteger(subMessage), (int)RSAKey.privateKey.second),new BigInteger(RSAKey.privateKey.first+""))).intValue();
+                messageDecrypt +=(char) (math.mod(math.Power(new BigInteger(subMessage), PrivateKey.getInstance().getPrivateKeyU()),new BigInteger(PrivateKey.getInstance().getPrivateKeyN()+""))).intValue();
                 subMessage = "";
             }
             else{
@@ -52,8 +46,7 @@ public class ChiffrementRSA {
     
     public static void main(String[] args) {
         ChiffrementRSA chiffrement = new ChiffrementRSA();
-        chiffrement.createKeys();
-        String message = new String(chiffrement.encrypt("Bravo ! Tu es fort !"));
+        String message = new String(chiffrement.encrypt("Bravo ! Tu es fort ! Une balade heureuse, dans la nature, par gaëtan"));
         System.out.println(message);
         System.out.println(chiffrement.decrypt(message));
         
