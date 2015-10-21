@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package chiffrementrsa;
+package chiffrementrsa.chiffrement;
 
 import chiffrementrsa.utils.MathUtils;
 import chiffrementrsa.utils.PrivateKey;
