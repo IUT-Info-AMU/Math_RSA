@@ -13,7 +13,7 @@ package chiffrementrsa.utils;
 public class PrivateKey {
     private static int privateKeyN;
     private static int privateKeyU;
-    private final static PrivateKey instance = new PrivateKey();
+    private static PrivateKey instance = new PrivateKey();
 
     public static int getPrivateKeyU() {
         return privateKeyU;
