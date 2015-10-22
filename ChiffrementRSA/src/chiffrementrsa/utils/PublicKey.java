@@ -17,7 +17,7 @@ public class PublicKey {
     private static int publicKeyN;
     private static int publicKeyC;
     private static int M;
-    private final static PublicKey instance = new PublicKey();
+    private static PublicKey instance = new PublicKey();
 
     public static int getPublicKeyN() {
         return publicKeyN;
