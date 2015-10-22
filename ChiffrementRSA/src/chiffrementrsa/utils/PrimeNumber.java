@@ -16,7 +16,7 @@ public class PrimeNumber {
    
     private static int primeP;
     private static int primeQ;
-    private final static PrimeNumber instance = new PrimeNumber(Config.generatePrimeMin,Config.generatePrimeMax);
+    private static PrimeNumber instance = new PrimeNumber(Config.generatePrimeMin,Config.generatePrimeMax);
 
     public PrimeNumber(int min, int max) {
         GeneratePrimePAndQ(min,max);
