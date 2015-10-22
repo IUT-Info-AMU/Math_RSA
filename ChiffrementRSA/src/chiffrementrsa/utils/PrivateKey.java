@@ -13,7 +13,7 @@ package chiffrementrsa.utils;
 public class PrivateKey {
     private static int privateKeyN;
     private static int privateKeyU;
-    private final static PrivateKey instance = new PrivateKey();
+    private static PrivateKey instance = new PrivateKey();
 
     public static int getPrivateKeyU() {
         return privateKeyU;
@@ -32,7 +32,7 @@ public class PrivateKey {
      */
     public void generateU(){
         MathUtils math = new MathUtils();
-        privateKeyU = math.modInverse(PublicKey.getPublicKeyC(), PublicKey.getM());
+        privateKeyU = MathUtils.modInverse(PublicKey.getPublicKeyC(), PublicKey.getM());
         System.out.println(privateKeyU);
     }
     /**

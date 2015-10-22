@@ -16,25 +16,39 @@ import java.math.BigInteger;
  * @author Gaëtan
  */
 public class ChiffrementRSA {
+    private static String message = null;
+    private static ChiffrementRSA instance;
+
+    public static ChiffrementRSA getInstance() {
+        return instance;
+    }
+
+    public static String getMessage() {
+        return message;
+    }
+
+    public static void setMessage(String message) {
+        ChiffrementRSA.message = message;
+    }
     
-    String encrypt(String messageToEncrypt){
+    public static String encrypt(String messageToEncrypt){
         MathUtils math = new MathUtils();
         String messageEncrypt = new String();
         for(char c : messageToEncrypt.toCharArray()){
-            messageEncrypt+= math.mod(math.Power(new BigInteger((int)c+""),PublicKey.getInstance().getPublicKeyC()), new BigInteger(PublicKey.getInstance().getPublicKeyN()+"")) + " ";
+            messageEncrypt+= math.mod(math.Power(new BigInteger((int)c+""),PublicKey.getPublicKeyC()), new BigInteger(PublicKey.getPublicKeyN()+"")) + " ";
         }
         return messageEncrypt;
 
     }
     
-    String decrypt(String messageToDecrypt){
+    public static String decrypt(String messageToDecrypt){
         MathUtils math = new MathUtils();
         String messageDecrypt = new String();
         String subMessage = new String();
         for(char c : messageToDecrypt.toCharArray()){
             if(c == ' '){
 
-                messageDecrypt +=(char) (math.mod(math.Power(new BigInteger(subMessage), PrivateKey.getInstance().getPrivateKeyU()),new BigInteger(PrivateKey.getInstance().getPrivateKeyN()+""))).intValue();
+                messageDecrypt +=(char) (math.mod(math.Power(new BigInteger(subMessage), PrivateKey.getPrivateKeyU()),new BigInteger(PrivateKey.getPrivateKeyN()+""))).intValue();
                 subMessage = "";
             }
             else{
@@ -46,7 +60,7 @@ public class ChiffrementRSA {
     
     public static void main(String[] args) {
         ChiffrementRSA chiffrement = new ChiffrementRSA();
-        String message = new String(chiffrement.encrypt("Bravo ! Tu es fort ! Une balade heureuse, dans la nature, par gaëtan"));
+        String message = chiffrement.encrypt("Bravo ! Tu es fort ! Une balade heureuse, dans la nature, par gaëtan");
         System.out.println(message);
         System.out.println(chiffrement.decrypt(message));
         
