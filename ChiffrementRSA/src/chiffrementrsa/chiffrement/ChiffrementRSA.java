@@ -57,12 +57,5 @@ public class ChiffrementRSA {
         }
         return messageDecrypt;
     }
-    
-    public static void main(String[] args) {
-        ChiffrementRSA chiffrement = new ChiffrementRSA();
-        String message = chiffrement.encrypt("Bravo ! Tu es fort ! Une balade heureuse, dans la nature, par gaëtan");
-        System.out.println(message);
-        System.out.println(chiffrement.decrypt(message));
-        
-    }  
+
 }

@@ -1,7 +1,12 @@
 package chiffrementrsa.interfaceRSA;
 
 import chiffrementrsa.chiffrement.ChiffrementRSA;
+import chiffrementrsa.utils.Config;
+import chiffrementrsa.utils.PrimeNumber;
+import chiffrementrsa.utils.PrivateKey;
+import chiffrementrsa.utils.PublicKey;
 import java.awt.*;        
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -14,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -34,6 +40,8 @@ public class RSA2015 extends JPanel {
 	private String textDecrypt = "Texte à décrypter";
 	private JTextArea champEncrypt = new JTextArea ();
 	private JTextArea champDecrypt = new JTextArea ();
+        private ImageIcon FlecheH = new ImageIcon ("./images/flechehaut2.png");
+	private ImageIcon FlecheB = new ImageIcon ("./images/flechebas2.png");
 	
 	
    /** Constructor to setup the UI components and event handling */
@@ -57,6 +65,7 @@ public class RSA2015 extends JPanel {
 					petitNord.add(lblP);
 					lblP.setHorizontalAlignment(SwingConstants.CENTER);
 					JTextField champP = new JTextField();
+                                        champP.setText(PrimeNumber.getPrimeP()+"");
 					petitNord.add(champP);
 					champP.setColumns(10);
 					JLabel lblInput = new JLabel("1. Génère P "); 
@@ -66,6 +75,7 @@ public class RSA2015 extends JPanel {
 					petitNord.add(lblQ);
 					lblQ.setHorizontalAlignment(SwingConstants.CENTER);
 					JTextField champQ = new JTextField();
+                                        champQ.setText(PrimeNumber.getPrimeQ()+"");
 					petitNord.add(champQ);
 					champQ.setColumns(10);
 
@@ -76,23 +86,26 @@ public class RSA2015 extends JPanel {
 					petitNord.add(lblN);
 					lblN.setHorizontalAlignment(SwingConstants.CENTER);
 					JTextField champN = new JTextField();
+                                        champN.setText(PublicKey.getPublicKeyN()+"");
 					petitNord.add(champN);
 					champN.setColumns(10);
 					
 					JLabel lblInput3 = new JLabel("3. Calcule N "); 
 				    petitNord.add(lblInput3);
-					JLabel lblE = new JLabel("E=");
+					JLabel lblE = new JLabel("C=");
 					petitNord.add(lblE);
 					lblE.setHorizontalAlignment(SwingConstants.CENTER);
 					JTextField champE = new JTextField();
+                                        champE.setText(PublicKey.getPublicKeyC()+"");
 					petitNord.add(champE);
 					champE.setColumns(10);
-					JLabel lblInput4 = new JLabel("4. Génère E "); 
+					JLabel lblInput4 = new JLabel("4. Génère C "); 
 				    petitNord.add(lblInput4);
 					JLabel lblD = new JLabel("D=");
 					petitNord.add(lblD);
 					lblD.setHorizontalAlignment(SwingConstants.CENTER);
 					JTextField champD = new JTextField();
+                                        champD.setText(PrivateKey.getPrivateKeyU()+"");
 					petitNord.add(champD);
 					champD.setColumns(10);
 					JLabel lblInput5 = new JLabel("5. Calcule D "); 
@@ -114,6 +127,7 @@ public class RSA2015 extends JPanel {
 					petitCentre.add(lblPriv);
 					fp.add(lblPriv);
 					JTextField champPub = new JTextField();
+                                        champPub.setText("[" + PublicKey.getPublicKeyN() + "," + PublicKey.getPublicKeyC() + "]" );
 					petitCentre.add(champPub);
 					fp.add(champPub);
 					champPub.setColumns(10);
@@ -122,15 +136,19 @@ public class RSA2015 extends JPanel {
 					petitCentre.add(lblPub);
 					fp.add(lblPub);
 					JTextField champPriv = new JTextField();
+                                        champPriv.setText("[" + PrivateKey.getPrivateKeyN() + "," + PrivateKey.getPrivateKeyU() + "]" );
 					petitCentre.add(champPriv);
 					fp.add(champPriv);
 					champPriv.setColumns(10);
-					ButtonGo GO = new ButtonGo();
+					JButton GO = new JButton("GO");
+                                        GO.addMouseListener(new MouseAdapter(){
+                                            //Nouvelle Gnération de clef public et privée
+                                        });
 					petitCentre.add(GO);
 					fp.add(GO);
-				    petitCentre.add(BorderLayout.CENTER,fp);
-				    petitCentre.setBackground(Color.WHITE);
-				    fp.setBackground(Color.WHITE);
+                                        petitCentre.add(BorderLayout.CENTER,fp);
+                                        petitCentre.setBackground(Color.WHITE);
+                                        fp.setBackground(Color.WHITE);
 				}
 				
 			}
@@ -151,10 +169,6 @@ public class RSA2015 extends JPanel {
 			decryptLayout.setBackground (Color.white);
 			champDecrypt.setPreferredSize (new Dimension (500, 100));
 			champDecrypt.setLineWrap (true);
-                        if(ChiffrementRSA.getMessage() != null){
-                            champDecrypt.setText(ChiffrementRSA.getMessage());
-                            System.out.println(ChiffrementRSA.getMessage());
-                        } 
 			decryptLayout.add (champDecrypt);
 			decryptLayout.setBorder (BorderFactory.createTitledBorder (BorderFactory.createLineBorder (Color.black, 2), textDecrypt));
                         
@@ -163,15 +177,48 @@ public class RSA2015 extends JPanel {
 			petitSud.add (encryptLayout, BorderLayout.NORTH);
 			petitSud.add (decryptLayout, BorderLayout.SOUTH);
 			
-			petitSud.add(new ArrowButton().createArrowButton());
+                        FlowLayout Fl = new FlowLayout();
+                        final JRadioButton imageH = new JRadioButton(FlecheH);
+                        imageH.setBackground(null);
+                        imageH.setBorderPainted(false);
+                        JPanel petitpetitSud = new  JPanel();
+                        petitpetitSud.setLayout(Fl);
+                        petitpetitSud.add(imageH);
+                        final JRadioButton imageB = new JRadioButton (FlecheB);
+                        imageB.setBackground(null);
+                        imageB.setBorderPainted(false);
+                        imageH.addMouseListener(new MouseAdapter(){
+                                public void mouseClicked(MouseEvent e) {
+                                         ImageIcon Fleche4 = new ImageIcon ("./images/flechehaut4.png");
+                                         imageH.setIcon(Fleche4);
+                                         imageB.setIcon(FlecheB);
+                                         //decryptage
+                                         ChiffrementRSA.setMessage(ChiffrementRSA.decrypt(ChiffrementRSA.getMessage()));
+                                         System.out.println(ChiffrementRSA.getMessage());
+                                         champEncrypt.setText(ChiffrementRSA.getMessage());
+                                }
+                        });
+                        imageB.addMouseListener(new MouseAdapter(){
+                                public void mouseClicked(MouseEvent e) {
+                                        // TODO Auto-generated method stub
+                                        //cryptage
+                                         ImageIcon Fleche4 = new ImageIcon ("./images/flechebas4.png");
+                                         imageB.setIcon(Fleche4);
+                                         imageH.setIcon(FlecheH);
+                                         ChiffrementRSA.setMessage(ChiffrementRSA.encrypt(champEncrypt.getText()));
+                                         System.out.println(ChiffrementRSA.getMessage());
+                                          champDecrypt.setText(ChiffrementRSA.getMessage());
+                                }
+                        });
+                        imageB.setContentAreaFilled(false);
+                        imageH.setContentAreaFilled(false);
+                        petitpetitSud.add (imageB);	
+                        petitpetitSud.setBackground (Color.white);                 
+
+                        petitSud.add(petitpetitSud);
 			
 		}
 		
    }// RSA2015 () 
-   
-   public static void main (String[] args) {
-	   
-	   //new RSA2015 ();
-   }  
    
 }
