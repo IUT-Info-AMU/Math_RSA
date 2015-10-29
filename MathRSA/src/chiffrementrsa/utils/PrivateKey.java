@@ -11,36 +11,40 @@ package chiffrementrsa.utils;
  * @author Gaëtan
  */
 public class PrivateKey {
-    private static int privateKeyN;
-    private static int privateKeyU;
-    private static PrivateKey instance = new PrivateKey();
+    private int privateKeyN;
+    private int privateKeyU;
 
-    public static int getPrivateKeyU() {
+    public int getPrivateKeyU() {
         return privateKeyU;
     }
 
-    public static int getPrivateKeyN() {
+    public int getPrivateKeyN() {
         return privateKeyN;
     }
 
-    public static PrivateKey getInstance() {
-        return instance;
+
+    public void setPrivateKeyN(int privateKeyN) {
+        this.privateKeyN = privateKeyN;
+    }
+
+    public void setPrivateKeyU(int privateKeyU) {
+        this.privateKeyU = privateKeyU;
     }
     
     /**
      * genere U second membre de la clef privee
      */
-    public void generateU(){
+    public void generateU(PublicKey publicKey){
         MathUtils math = new MathUtils();
-        privateKeyU = MathUtils.modInverse(PublicKey.getPublicKeyC(), PublicKey.getM());
+        setPrivateKeyU(MathUtils.modInverse(publicKey.getPublicKeyC(), publicKey.getM()));
         System.out.println(privateKeyU);
     }
     /**
      * constructeur, appelle simplement generateU()
      */
-    public PrivateKey() {
-        privateKeyN = PublicKey.getPublicKeyN();
-        generateU();
+    public PrivateKey(PublicKey publicKey) {
+        setPrivateKeyN(publicKey.getPublicKeyN());
+        generateU(publicKey);
     }
     
 }

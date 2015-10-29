@@ -14,32 +14,34 @@ import java.util.Random;
  */
 public class PrimeNumber {
    
-    private static int primeP;
-    private static int primeQ;
-    private static PrimeNumber instance = new PrimeNumber(Config.generatePrimeMin,Config.generatePrimeMax);
+    private int primeP;
+    private int primeQ;
 
-    public PrimeNumber(int min, int max) {
-        GeneratePrimePAndQ(min,max);
+    public PrimeNumber() {
+        GeneratePrimePAndQ(Config.generatePrimeMin,Config.generatePrimeMax);
     }
 
-    public static int getPrimeP() {
+    public int getPrimeP() {
         return primeP;
     }
 
-    public static int getPrimeQ() {
+    public int getPrimeQ() {
         return primeQ;
     }
-    
-    public static PrimeNumber getInstance(){
-        return instance;
+
+    public void setPrimeP(int primeP) {
+        this.primeP = primeP;
     }
-    
+
+    public void setPrimeQ(int primeQ) {
+        this.primeQ = primeQ;
+    }
     /**
      * Renvoie si un entier passe un parametre est un nombre premier ou pas
      * @param n un entier
      * @return true si n est premier ou false si n n'est pas premier
      **/
-    boolean isPrime(int n) {
+    static boolean isPrime(int n) {
         //check if n is a multiple of 2
         if (n%2==0) return false;
         for(int i=3;i*i<=n;i+=2) {
@@ -73,8 +75,8 @@ public class PrimeNumber {
      */
     public void GeneratePrimePAndQ(int min,int max){
         int firstPrimeNumber = GeneratePrimeNumber(min,max);
-        primeP = firstPrimeNumber;
-        primeQ = GeneratePrimeNumber(min + firstPrimeNumber,max + firstPrimeNumber);
+        setPrimeP(firstPrimeNumber);
+        setPrimeQ(GeneratePrimeNumber(min + firstPrimeNumber,max + firstPrimeNumber));
         System.out.println(primeP + " " + primeQ);
     }
 }

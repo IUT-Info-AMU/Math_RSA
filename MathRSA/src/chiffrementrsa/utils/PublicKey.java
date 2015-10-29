@@ -14,57 +14,70 @@ import java.util.Random;
  */
 public class PublicKey {
     
-    private static int publicKeyN;
-    private static int publicKeyC;
-    private static int M;
-    private static PublicKey instance = new PublicKey();
+    private int publicKeyN;
+    private int publicKeyC;
+    private int M;
+    private PrimeNumber primeNumber;
 
-    public static int getPublicKeyN() {
+    public PrimeNumber getPrimeNumber() {
+        return primeNumber;
+    }
+
+    public void setPrimeNumber(PrimeNumber primeNumber) {
+        this.primeNumber = primeNumber;
+    }
+
+    public int getPublicKeyN() {
         return publicKeyN;
     }
 
-    public static int getPublicKeyC() {
+    public int getPublicKeyC() {
         return publicKeyC;
     }
 
-    public static int getM() {
+    public int getM() {
         return M;
     }
 
-    public static PublicKey getInstance() {
-        return instance;
+    public void setPublicKeyN(int publicKeyN) {
+        this.publicKeyN = publicKeyN;
+    }
+
+    public void setPublicKeyC(int publicKeyC) {
+       this.publicKeyC = publicKeyC;
+    }
+
+    public void setM(int M) {
+        this.M = M;
     }
  
     /**
      *Genere M a  partir de p et q avec la formule (p-1)*(q-1) 
      **/
     public void GenerateM(){
-        M = (PrimeNumber.getPrimeP() -1) * (PrimeNumber.getPrimeQ() -1);
+        setM((primeNumber.getPrimeP() -1) * (primeNumber.getPrimeQ() -1));
     }
     /**
      * Genere C ayant pour PGCD 1 avec M, il doit etre contneu entre MinC et MaxC
      **/
     public void GenerateC(){
         Random rand = new Random();
-        publicKeyC = rand.nextInt(Config.MaxC - Config.MinC) + Config.MinC;
+        setPublicKeyC(rand.nextInt(Config.MaxC - Config.MinC) + Config.MinC);
         MathUtils math = new MathUtils();
         while (math.PGCD(M,publicKeyC) != 1){
-            publicKeyC = rand.nextInt(Config.MaxC - Config.MinC) + Config.MinC;
+           setPublicKeyC(rand.nextInt(Config.MaxC - Config.MinC) + Config.MinC);
         }
     }
     /**
      * Genere la clef public, N en utilisant la formule N = p*q et les fonctions GenerateM et GenerateC pour Generer M et C
      **/
-    private PublicKey(){
+    public PublicKey(){
+        primeNumber = new PrimeNumber();
         GenerateM();
         GenerateC();
-        publicKeyN = PrimeNumber.getPrimeP() * PrimeNumber.getPrimeQ();
+        setPublicKeyN(primeNumber.getPrimeP() * primeNumber.getPrimeQ());
         System.out.println(publicKeyN);
         System.out.println(M);
         System.out.println(publicKeyC);
-    }
-    
-    public static void main(String[] args) {
-        PublicKey pub = new PublicKey();
     }
 }
