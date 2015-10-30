@@ -209,7 +209,7 @@ public class RSA2015 extends JPanel {
                                          //decryptage
                                          chiffrement.setMessage(chiffrement.decrypt(champDecrypt.getText()));
                                          System.out.println(chiffrement.getMessage());
-                                         champEncrypt.setText(chiffrement.getMessage());
+                                         champEncrypt.setText("Texte décrypté : "+chiffrement.getMessage());
                                 }
                         });
                         imageB.addMouseListener(new MouseAdapter(){
@@ -221,7 +221,7 @@ public class RSA2015 extends JPanel {
                                          imageH.setIcon(FlecheH);
                                          chiffrement.setMessage(chiffrement.encrypt(champEncrypt.getText()));
                                          System.out.println(chiffrement.getMessage());
-                                          champDecrypt.setText(chiffrement.getMessage());
+                                         champDecrypt.setText(chiffrement.getMessage());
                                 }
                         });
                         imageB.setContentAreaFilled(false);
