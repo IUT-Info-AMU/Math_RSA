@@ -6,7 +6,6 @@
 
 package chiffrementrsa.utils;
 
-import static java.lang.Math.pow;
 import java.math.BigInteger;
 
 /**
@@ -49,8 +48,8 @@ public class MathUtils {
     
     /**
      * Fonction modulo
-     * @param a un int
-     * @param b un int
+     * @param a un entier
+     * @param b un entier
      * @return le modulo de a par b, un int
      */
     public BigInteger mod(BigInteger a,BigInteger b){
@@ -58,11 +57,12 @@ public class MathUtils {
     }
     
      /**
-     * Computes the canonical class of n modulo mod
-     * @param n the integer to reduce modulo mod
-     * @param mod the modulo
-     * @return the integer k such that k = n [mod] et 0 <= k < mod
+     * Calcule la classe canonique de n modulo mod
+     * @param n L'entier qui va réduire modulo mod
+     * @param mod le modulo
+     * @return  un entier qui vaut m ayant pour valeur "n modulo mod" ou bien m + mod 
      */
+    /* source : http://www.liafa.univ-paris-diderot.fr/~carton/Enseignement/CalculFormel/Style/ModArith/Gcd.java*/
     public static int reduce(int n, int mod)
     {
 	int m = n % mod;	// -mod < m < mod
@@ -72,35 +72,15 @@ public class MathUtils {
 	else 
 	    return m + mod;
     }
+    
     /**
-     * Computes the GCD of the two integers.
-     * @param m the first integer
-     * @param n the second integer 
-     * @return the GCD of m and n
+     * Calcule le plus grand diviseur commun et les coefficients de l'égalité Bezout.
+     * @param m un entier
+     * @param n un entier 
+     * @return Un tableau g de 3 entiers. g à la position 0 est le PGCD de m et n.
+      * G à la position 1 et G à la position 2 sont deux entiers tels que g à la position 0  = mg à la position 1 + ng à la position 2.
      */
-    public static int gcd(int m, int n) 
-    {
-	int r;
-
-	// Exchange m and n if m < n
-	if (m < n) {
-	    r = n;  n = m; m = r;
-	}
-	// It can be assumed that m >= n
-	while (n > 0) {
-	    r = m % n;
-	    m = n;
-	    n = r;
-	}
-	return m;
-    }
-    /**
-     * Computes the GCD and the coefficients of the Bezout equality.
-     * @param m the first integer
-     * @param n the second integer 
-     * @return an array g of 3 integers.  g[0] is the GCD of m and n.
-     *  g[1] and g[2] are two integers such that g[0] = m g[1] + n g[2].
-     */
+    /* source : http://www.liafa.univ-paris-diderot.fr/~carton/Enseignement/CalculFormel/Style/ModArith/Gcd.java*/
     public static int[] extgcd(int m, int n) 
     {
 	// Both arrays ma and na are arrays of 3 integers such that
@@ -129,27 +109,18 @@ public class MathUtils {
 	return ma;
     }
     /**
-     * Computes the modular inverse
-     * @param n the integer to inverse
-     * @param mod the modula
-     * @return the integer 0 <= m < mod such that nm = 1 [mod] or
-     *         -1 if if n and mod are not coprime
+     * Calcule l'inverse modulaire
+     * @param n le nombre entier à inverser
+     * @param mod le modulo
+     * @return l'entier -1 si n et mod ne sont pas premiers entre eux ou bien le résultat de reduce(int,int)
      */
+    /* source : http://www.liafa.univ-paris-diderot.fr/~carton/Enseignement/CalculFormel/Style/ModArith/Gcd.java*/
     public static int modInverse(int n, int mod)
     {
 	int[] g = extgcd(mod, n);
 	if (g[0] != 1)
-	    return -1;		// n and mod not coprime
+	    return -1;		// n et mod ne sont pas premiers entre eux
 	else 
 	    return reduce(g[2], mod);
-    }
-    
-    public static void main(String[] args) {
-        MathUtils math = new MathUtils();
-        System.out.println(math.Power(new BigInteger(472+""), 7));
-        System.out.println(math.mod(math.Power(new BigInteger(472+""), 4849),new BigInteger(5429+"")));
-        System.out.println(math.modInverse(7, 2376));
-        //ceci est un test !
-        
-    }
+    }  
 }

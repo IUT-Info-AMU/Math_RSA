@@ -16,23 +16,41 @@ public class PrimeNumber {
    
     private int primeP;
     private int primeQ;
-
+    /**
+     * Constructeur, utilise la fonction GeneratePrimePAndQ(int min,int max)
+     **/
     public PrimeNumber() {
         GeneratePrimePAndQ(Config.generatePrimeMin,Config.generatePrimeMax);
     }
-
+    
+    /**
+     * Retourne la donnée membre primeP
+     * @return primeP de type int
+     **/
     public int getPrimeP() {
         return primeP;
     }
-
+    
+    /**
+     * Retourne la donnée membre primeQ
+     * @return primeQ de type int
+     **/
     public int getPrimeQ() {
         return primeQ;
     }
-
+    
+    /**
+     * Assigne la nouvelle valeur de primeP
+     * @param primeP de type int
+     **/
     public void setPrimeP(int primeP) {
         this.primeP = primeP;
     }
-
+    
+    /**
+     * Assigne la nouvelle valeur de primeQ
+     * @param primeQ de type int
+     **/
     public void setPrimeQ(int primeQ) {
         this.primeQ = primeQ;
     }

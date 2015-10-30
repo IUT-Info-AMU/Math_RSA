@@ -1,22 +1,12 @@
 package chiffrementrsa.interfaceRSA;
 
 import chiffrementrsa.chiffrement.ChiffrementRSA;
-import chiffrementrsa.utils.Config;
-import chiffrementrsa.utils.PrimeNumber;
-import chiffrementrsa.utils.PrivateKey;
-import chiffrementrsa.utils.PublicKey;
 import java.awt.*;        
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -102,7 +92,7 @@ public class RSA2015 extends JPanel {
                                         champC.setText(chiffrement.getPublicKey().getPublicKeyC()+"");
 					petitNord.add(champC);
 					champC.setColumns(10);
-					JLabel lblInput4 = new JLabel("4. Génère C "); 
+					JLabel lblInput4 = new JLabel("4. Calcule C "); 
 				    petitNord.add(lblInput4);
 					
                                     JLabel lblM = new JLabel("M=");
@@ -217,7 +207,7 @@ public class RSA2015 extends JPanel {
                                          imageH.setIcon(Fleche4);
                                          imageB.setIcon(FlecheB);
                                          //decryptage
-                                         chiffrement.setMessage(chiffrement.decrypt(chiffrement.getMessage()));
+                                         chiffrement.setMessage(chiffrement.decrypt(champDecrypt.getText()));
                                          System.out.println(chiffrement.getMessage());
                                          champEncrypt.setText(chiffrement.getMessage());
                                 }

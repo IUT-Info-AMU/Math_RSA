@@ -13,26 +13,41 @@ package chiffrementrsa.utils;
 public class PrivateKey {
     private int privateKeyN;
     private int privateKeyU;
-
+    
+    /**
+     * Retourne la valeur de U de la clef privée
+     * @return PrivateKeyU de type int
+     **/
     public int getPrivateKeyU() {
         return privateKeyU;
     }
-
+    /**
+     * Retourne la valeur de N de la clef privée
+     * @return PrivateKeyN de type int
+     **/
     public int getPrivateKeyN() {
         return privateKeyN;
     }
 
-
+    /**
+     * Assigne une nouvelle valeur à PrivateKeyN
+     * @param privateKeyN un entier, la nouvelle valeur
+     **/
     public void setPrivateKeyN(int privateKeyN) {
         this.privateKeyN = privateKeyN;
     }
 
+    /**
+     * Assigne une nouvelle valeur à PrivateKeyU
+     * @param privateKeyU un entier, la nouvelle valeur
+     **/
     public void setPrivateKeyU(int privateKeyU) {
         this.privateKeyU = privateKeyU;
     }
     
     /**
      * genere U second membre de la clef privee
+     * @param publicKey de type PublicKey
      */
     public void generateU(PublicKey publicKey){
         MathUtils math = new MathUtils();
@@ -40,7 +55,8 @@ public class PrivateKey {
         System.out.println(privateKeyU);
     }
     /**
-     * constructeur, appelle simplement generateU()
+     * constructeur, utilise les fonctions setPrivateKeyN(int) generateU(PublicKey)
+     * @param publicKey de type PublicKey
      */
     public PrivateKey(PublicKey publicKey) {
         setPrivateKeyN(publicKey.getPublicKeyN());
