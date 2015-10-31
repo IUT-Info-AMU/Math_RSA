@@ -12,6 +12,7 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -39,13 +40,16 @@ public class ConfigPanel extends JPanel{
         lblP.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e) {
                int newGeneratePrimeMin = Integer.parseInt(champPrimeNumberMin.getText());
+               JOptionPane popup = new JOptionPane();
                if(newGeneratePrimeMin > Config.getGeneratePrimeMax() || newGeneratePrimeMin <= 0){
+                   popup.showMessageDialog(null, "Mauvaise valeur", "Erreur", JOptionPane.ERROR_MESSAGE);
                    System.out.println("Mauvaise valeur");
                    champPrimeNumberMin.setText(Config.getGeneratePrimeMin()+"");
                }          
                else{
                    Config.setGeneratePrimeMin(newGeneratePrimeMin);
-                    System.out.println("Valeur changé");
+                   popup.showMessageDialog(null, "Valeur changé", "Information", JOptionPane.INFORMATION_MESSAGE);
+                   System.out.println("Valeur changé");
                }      
              }
         });
@@ -58,14 +62,17 @@ public class ConfigPanel extends JPanel{
         champPrimeNumberMax.setText(Config.getGeneratePrimeMax()+"");
         lblQ.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e) {
+               JOptionPane popup = new JOptionPane();
                int newGeneratePrimeMax = Integer.parseInt(champPrimeNumberMax.getText());
                if(newGeneratePrimeMax < Config.getGeneratePrimeMin() || newGeneratePrimeMax <= 0){
+                   popup.showMessageDialog(null, "Mauvaise valeur", "Erreur", JOptionPane.ERROR_MESSAGE);
                    System.out.println("Mauvaise valeur");
                    champPrimeNumberMax.setText(Config.getGeneratePrimeMax()+"");
                } 
                else{
                    Config.setGeneratePrimeMax(newGeneratePrimeMax);
-                    System.out.println("Valeur changé");
+                   popup.showMessageDialog(null, "Valeur changé", "Information", JOptionPane.INFORMATION_MESSAGE);
+                   System.out.println("Valeur changé");
                }      
 
              }
@@ -80,14 +87,17 @@ public class ConfigPanel extends JPanel{
         champCMin.setText(Config.getMinC()+"");
         lblN.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e) {
+               JOptionPane popup = new JOptionPane();
                int newGeneratePrimeMinC = Integer.parseInt(champCMin.getText());
                if(newGeneratePrimeMinC > Config.getMaxC() || newGeneratePrimeMinC <= 0){
+                   popup.showMessageDialog(null, "Mauvaise valeur", "Erreur", JOptionPane.ERROR_MESSAGE);
                    System.out.println("Mauvaise valeur");
                    champCMin.setText(Config.getMinC()+"");
                }   
                else{
                    Config.setMinC(newGeneratePrimeMinC);
-                    System.out.println("Valeur changé");
+                   popup.showMessageDialog(null, "Valeur changé", "Information", JOptionPane.INFORMATION_MESSAGE);
+                   System.out.println("Valeur changé");
                }      
 
              }
@@ -102,14 +112,17 @@ public class ConfigPanel extends JPanel{
         champCMax.setText(Config.getMaxC()+"");
         lblE.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e) {
+               JOptionPane popup = new JOptionPane();
                int newGeneratePrimeMaxC = Integer.parseInt(champCMax.getText());
                if(newGeneratePrimeMaxC < Config.getMinC() || newGeneratePrimeMaxC <= 0){
+                   popup.showMessageDialog(null, "Mauvaise valeur", "Erreur", JOptionPane.ERROR_MESSAGE);
                    System.out.println("Mauvaise valeur");
                    champCMax.setText(Config.getMaxC()+"");
                }
                else{
                    Config.setMaxC(newGeneratePrimeMaxC);
-                    System.out.println("Valeur changé");
+                   popup.showMessageDialog(null, "Valeur changé", "Information", JOptionPane.INFORMATION_MESSAGE);
+                   System.out.println("Valeur changé");
                }
 
              }
