@@ -156,7 +156,7 @@ public class RSA2015 extends JPanel {
                                                 champU.setText(chiffrement.getPrivateKey().getPrivateKeyU()+"");
                                                 champPub.setText("[" + chiffrement.getPublicKey().getPublicKeyN() + "," + chiffrement.getPublicKey().getPublicKeyC() + "]" );
                                                 champPriv.setText("[" + chiffrement.getPrivateKey().getPrivateKeyN() + "," + chiffrement.getPrivateKey().getPrivateKeyU() + "]" );
-                                             }
+                                            }
                                         });
 					petitCentre.add(GO);
 					fp.add(GO);
@@ -210,11 +210,11 @@ public class RSA2015 extends JPanel {
                                          chiffrement.setMessage(chiffrement.decrypt(champDecrypt.getText()));
                                          System.out.println(chiffrement.getMessage());
                                          champEncrypt.setText("Texte décrypté : "+chiffrement.getMessage());
+                                         System.gc();
                                 }
                         });
                         imageB.addMouseListener(new MouseAdapter(){
                                 public void mouseClicked(MouseEvent e) {
-                                        // TODO Auto-generated method stub
                                         //cryptage
                                          ImageIcon Fleche4 = new ImageIcon ("./images/flechebas4.png");
                                          imageB.setIcon(Fleche4);
