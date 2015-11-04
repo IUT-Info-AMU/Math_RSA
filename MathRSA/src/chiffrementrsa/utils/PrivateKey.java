@@ -50,7 +50,6 @@ public class PrivateKey {
      * @param publicKey de type PublicKey
      */
     public void generateU(PublicKey publicKey){
-        MathUtils math = new MathUtils();
         setPrivateKeyU(MathUtils.modInverse(publicKey.getPublicKeyC(), publicKey.getM()));
         System.out.println(privateKeyU);
     }

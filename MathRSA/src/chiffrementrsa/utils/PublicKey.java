@@ -93,8 +93,7 @@ public class PublicKey {
     public void GenerateC(){
         Random rand = new Random();
         setPublicKeyC(rand.nextInt(Config.MaxC - Config.MinC) + Config.MinC);
-        MathUtils math = new MathUtils();
-        while (math.PGCD(M,publicKeyC) != 1){
+        while (MathUtils.PGCD(M,publicKeyC) != 1){
            setPublicKeyC(rand.nextInt(Config.MaxC - Config.MinC) + Config.MinC);
         }
     }

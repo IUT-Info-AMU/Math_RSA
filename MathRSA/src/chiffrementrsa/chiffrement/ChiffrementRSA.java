@@ -75,12 +75,15 @@ public class ChiffrementRSA {
      * @return messageEncrypt de type string, le message crypté
      **/
     public String encrypt(String messageToEncrypt){
-        MathUtils math = new MathUtils();
         String messageEncrypt = new String();
         for(char c : messageToEncrypt.toCharArray()){
-            messageEncrypt+= math.mod(math.Power(new BigInteger((int)c+""),publicKey.getPublicKeyC()), new BigInteger(publicKey.getPublicKeyN()+"")) + " ";
+            BigInteger chr = new BigInteger((int)c + "");
+            
+            messageEncrypt+= MathUtils.mod(
+                MathUtils.Power(chr,publicKey.getPublicKeyC()), 
+                new BigInteger(publicKey.getPublicKeyN()+"")
+            ) + " ";
         }
-        math = null;
         return messageEncrypt;
 
     }
@@ -91,20 +94,20 @@ public class ChiffrementRSA {
      * @return messageDecrypt de type string, le message Décrypté
      **/
     public String decrypt(String messageToDecrypt){
-        MathUtils math = new MathUtils();
         String messageDecrypt = new String();
         String subMessage = new String();
         for(char c : messageToDecrypt.toCharArray()){
             if(c == ' '){
-
-                messageDecrypt +=(char) (math.mod(math.Power(new BigInteger(subMessage), privateKey.getPrivateKeyU()),new BigInteger(privateKey.getPrivateKeyN()+""))).intValue();
+                messageDecrypt += (char) (MathUtils.mod(
+                    MathUtils.Power(new BigInteger(subMessage), privateKey.getPrivateKeyU()), 
+                    new BigInteger(privateKey.getPrivateKeyN()+"")
+                )).intValue();
                 subMessage = "";
             }
             else{
                 subMessage += c;
             }
         }
-        math = null;
         subMessage = null;
         return messageDecrypt;
     }
